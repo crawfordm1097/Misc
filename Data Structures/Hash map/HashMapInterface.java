@@ -115,7 +115,7 @@ public interface HashMapInterface<K, V> {
     void resizeBackingTable(int length);
 
     /**
-     * DO NOT USE THIS METHOD IN YOUR CODE.  IT IS FOR TESTING ONLY.
+     * METHOD FOR TESTING ONLY.
      *
      * @return the backing array of the data structure, not a copy.  INCLUDE
      * EMPTY SPACES

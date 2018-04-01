@@ -6,7 +6,6 @@ import java.util.NoSuchElementException;
  * @author Mikayla Crawford
  */
 public class ArrayStack<T> implements StackInterface<T> {
-  // Do not add new instance variables.
   private T[] backingArray;
   private int size;
 
@@ -21,7 +20,7 @@ public class ArrayStack<T> implements StackInterface<T> {
   /**
    * Return true if this stack contains no elements, false otherwise.
    *
-   * This method should be implemented in O(1) time.
+   * O(1) time.
    *
    * @return true if the stack is empty; false otherwise
    */
@@ -30,10 +29,9 @@ public class ArrayStack<T> implements StackInterface<T> {
   }
 
   /**
-   * Pop from the stack.
+   * Pop from the stack. Does not shrink the backing array.
    *
-   * Do not shrink the backing array.
-   * This method should be implemented in amortized O(1) time.
+   * Amortized O(1) time.
    *
    * @see StackInterface#pop():
    * @return the data from the front of the stack
@@ -50,11 +48,8 @@ public class ArrayStack<T> implements StackInterface<T> {
   }
 
   /**
-   * Push the given data onto the stack.
-   *
-   * If sufficient space is not available in the backing array, you should
-   * regrow it to 1.5 times the current backing array length, rounding down
-   * if necessary.
+   * Push the given data onto the stack. If the backing array is full, it is
+   * regrown to 1.5 its size.
    *
    * @see StackInterface#push(T data):
    * @param data the data to add
@@ -81,7 +76,7 @@ public class ArrayStack<T> implements StackInterface<T> {
   /**
    * Return the size of the stack.
    *
-   * This method should be implemented in O(1) time.
+   * O(1) time.
    *
    * @return number of items in the stack
    */
@@ -90,13 +85,11 @@ public class ArrayStack<T> implements StackInterface<T> {
   }
 
   /**
-   * Returns the backing array of this stack.
-   * Normally, you would not do this, but included for testing.
+   * Returns the backing array of this stack. Used for testing.
    *
    * @return the backing array
    */
   public Object[] getBackingArray() {
-      // DO NOT MODIFY!
       return backingArray;
   }
 }

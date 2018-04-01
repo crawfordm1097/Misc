@@ -6,7 +6,6 @@ import java.util.NoSuchElementException;
  * @author Mikayla Crawford
  */
 public class LinkedQueue<T> implements QueueInterface<T> {
-  // Do not add new instance variables.
   private LinkedNode<T> head;
   private LinkedNode<T> tail;
   private int size;
@@ -14,7 +13,7 @@ public class LinkedQueue<T> implements QueueInterface<T> {
   /**
    * Dequeue from the front of the queue.
    *
-   * This method should be implemented in O(1) time.
+   * O(1) time.
    *
    * @return the data from the front of the queue
    * @throws java.util.NoSuchElementException if the queue is empty
@@ -39,7 +38,7 @@ public class LinkedQueue<T> implements QueueInterface<T> {
   /**
    * Add the given data the the queue.
    *
-   * This method should be implemented in O(1) time.
+   * O(1) time.
    *
    * @param data the data to add
    * @throws IllegalArgumentException if data is null
@@ -61,7 +60,7 @@ public class LinkedQueue<T> implements QueueInterface<T> {
   /**
    * Return true if this queue contains no elements, false otherwise.
    *
-   * This method should be implemented in O(1) time.
+   * O(1) time.
    *
    * @return true if the queue is empty; false otherwise
    */
@@ -72,7 +71,7 @@ public class LinkedQueue<T> implements QueueInterface<T> {
   /**
    * Return the size of the queue.
    *
-   * This method should be implemented in O(1) time.
+   * O(1) time.
    *
    * @return number of items in the queue
    */
@@ -81,26 +80,20 @@ public class LinkedQueue<T> implements QueueInterface<T> {
   }
 
   /**
-   * Returns the head of this queue.
-   * Normally, you would not do this, but we need it for grading your work.
-   *
-   * DO NOT USE THIS METHOD IN YOUR CODE.
+   * Returns the head of this queue. Used for testing.
    *
    * @return the head node
    */
   public LinkedNode<T> getHead() {
-      // DO NOT MODIFY!
       return head;
   }
 
   /**
-   * Returns the tail of this queue.
-   * Normally, you would not do this, but included for testing.
+   * Returns the tail of this queue. Used for testing.
    *
    * @return the tail node
    */
   public LinkedNode<T> getTail() {
-      // DO NOT MODIFY!
       return tail;
   }
 }

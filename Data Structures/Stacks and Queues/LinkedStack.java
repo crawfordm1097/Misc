@@ -6,14 +6,13 @@ import java.util.NoSuchElementException;
  * @author Mikayla Crawford
  */
 public class LinkedStack<T> implements StackInterface<T> {
-  // Do not add new instance variables.
   private LinkedNode<T> head;
   private int size;
 
   /**
    * Return true if this stack contains no elements, false otherwise.
    *
-   * This method should be implemented in O(1) time.
+   * O(1) time.
    *
    * @return true if the stack is empty; false otherwise
    */
@@ -22,10 +21,9 @@ public class LinkedStack<T> implements StackInterface<T> {
   }
 
   /**
-   * Pop from the stack.
+   * Pop from the stack. Removes and returns the top-most element on the stack.
    *
-   * Removes and returns the top-most element on the stack.
-   * This method should be implemented in O(1) time.
+   * O(1) time.
    *
    * @return the data from the front of the stack
    * @throws java.util.NoSuchElementException if the stack is empty
@@ -46,11 +44,10 @@ public class LinkedStack<T> implements StackInterface<T> {
   }
 
   /**
-   * Push the given data onto the stack.
+   * Push the given data onto the stack.The given element becomes the top-most
+   * element of the stack.
    *
-   * The given element becomes the top-most element of the stack.
-   * This method should be implemented in (if array-backed, amortized) O(1)
-   * time.
+   * O(1) time.
    *
    * @param data the data to add
    * @throws IllegalArgumentException if data is null
@@ -71,7 +68,7 @@ public class LinkedStack<T> implements StackInterface<T> {
   /**
    * Return the size of the stack.
    *
-   * This method should be implemented in O(1) time.
+   * O(1) time.
    *
    * @return number of items in the stack
    */
@@ -80,13 +77,11 @@ public class LinkedStack<T> implements StackInterface<T> {
   }
 
   /**
-   * Returns the head of this stack.
-   * Normally, you would not do this, but included for testing.
+   * Returns the head of this stack. Used for testing.
    *
    * @return the head node
    */
   public LinkedNode<T> getHead() {
-      // DO NOT MODIFY!
       return head;
   }
 }

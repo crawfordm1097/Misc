@@ -19,10 +19,6 @@ public class HashMap<K, V> implements HashMapInterface<K, V> {
   /**
    * Create a hash map with no entries. The backing array has an initial
    * capacity of {@code INITIAL_CAPACITY}.
-   *
-   * Do not use magic numbers!
-   *
-   * Use constructor chaining.
    */
   public HashMap() {
       this(INITIAL_CAPACITY);
@@ -31,8 +27,6 @@ public class HashMap<K, V> implements HashMapInterface<K, V> {
   /**
    * Create a hash map with no entries. The backing array has an initial
    * capacity of {@code initialCapacity}.
-   *
-   * You may assume {@code initialCapacity} will always be positive.
    *
    * @param initialCapacity initial capacity of the backing array
    */
@@ -242,11 +236,6 @@ public class HashMap<K, V> implements HashMapInterface<K, V> {
 
   /**
    * Returns a List view of the values contained in this map.
-   * Use any class that implements the List interface
-   * This includes {@code java.util.ArrayList} and
-   * {@code java.util.LinkedList}. You should iterate over the table in
-   * order of increasing index, and iterate over each chain from front to
-   * back. Add entries to the List in the order in which they are traversed.
    *
    * @return list of values in this map
    */
@@ -275,9 +264,6 @@ public class HashMap<K, V> implements HashMapInterface<K, V> {
    * After resizing, the table's load factor is permitted to exceed
    * MAX_LOAD_FACTOR. No adjustment to the backing table's length is necessary
    * should this occurr.
-   *
-   * Remember that you cannot just simply copy the entries over to the new
-   * array.
    *
    * @param length new length of the backing table
    * @throws IllegalArgumentException if length is non-positive or less than
@@ -315,13 +301,12 @@ public class HashMap<K, V> implements HashMapInterface<K, V> {
   }
 
   /**
-   * DO NOT USE THIS METHOD IN YOUR CODE.  IT IS FOR TESTING ONLY.
+   * METHOD FOR TESTING ONLY.
    *
-   * @return the backing array of the data structure, not a copy.  INCLUDE
+   * @return the backing array of the data structure, not a copy. INCLUDE
    * EMPTY SPACES
    */
   public MapEntry<K, V>[] getTable() {
-      // DO NOT EDIT THIS METHOD!
       return table;
   }
 }

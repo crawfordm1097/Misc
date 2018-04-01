@@ -6,19 +6,17 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 /**
- * Your implementation of an AVL Tree.
+ * Implementation of an AVL Tree.
  *
  * @author Mikayla Crawford
  * @version 1.0
  */
 public class AVL<T extends Comparable<? super T>> implements AVLInterface<T> {
-    // DO NOT ADD OR MODIFY INSTANCE VARIABLES.
     private AVLNode<T> root;
     private int size;
 
     /**
      * A no argument constructor that should initialize an empty AVL tree.
-     * DO NOT IMPLEMENT THIS CONSTRUCTOR!
      */
     public AVL() {
     }
@@ -49,9 +47,6 @@ public class AVL<T extends Comparable<? super T>> implements AVLInterface<T> {
      * appropriate location. If the data is already in the tree, then nothing
      * should be done (the duplicate shouldn't get added, and size should not be
      * incremented).
-     *
-     * Remember to recalculate heights going up the tree, rebalancing if
-     * necessary.
      *
      * @throws java.lang.IllegalArgumentException if the data is null
      * @param data the data to be added
@@ -183,18 +178,8 @@ public class AVL<T extends Comparable<? super T>> implements AVLInterface<T> {
     }
 
     /**
-     * Removes the data from the tree.  There are 3 cases to consider:
-     * 1: the data is a leaf.  In this case, simply remove it.
-     * 2: the data has one child.  In this case, simply replace the node with
-     * the child node.
-     * 3: the data has 2 children.  There are generally two approaches:
-     * replacing the data with either the largest element in the left subtree
-     * (commonly called the predecessor), or replacing it with the smallest
-     * element in the right subtree (commonly called the successor). For this
-     * assignment, use the predecessor.
-     *
-     * Remember to recalculate heights going up the tree, rebalancing if
-     * necessary.
+     * Removes the data from the tree. If the node has two children, it is
+     * replaced with its predecessor.
      *
      * @throws java.lang.IllegalArgumentException if the data is null
      * @throws java.util.NoSuchElementException if the data is not in the tree
@@ -525,8 +510,6 @@ public class AVL<T extends Comparable<? super T>> implements AVLInterface<T> {
     /**
      * Return the height of the root of the tree.
      *
-     * This method does not need to traverse the entire tree.
-     *
      * @return the height of the root of the tree, -1 if the tree is empty
      */
     public int height() {
@@ -535,13 +518,10 @@ public class AVL<T extends Comparable<? super T>> implements AVLInterface<T> {
 
     /**
      * THIS METHOD IS ONLY FOR TESTING PURPOSES.
-     * DO NOT USE IT IN YOUR CODE
-     * DO NOT CHANGE THIS METHOD
      *
      * @return the root of the tree
      */
     public AVLNode<T> getRoot() {
-        // DO NOT EDIT THIS METHOD!
         return root;
     }
 }

@@ -1,8 +1,5 @@
 /**
  * Node class used in linked data structure implementations.
- *
- * @author CS 1332 TAs
- * @version 1.0
  */
 public class LinkedNode<T> {
 

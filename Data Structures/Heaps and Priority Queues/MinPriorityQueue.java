@@ -7,8 +7,6 @@ import java.util.NoSuchElementException;
  */
 public class MinPriorityQueue<T extends Comparable<? super T>> implements PriorityQueueInterface<T> {
   private HeapInterface<T> backingHeap;
-  // Do not add any more instance variables. Do not change the declaration
-  // of the instance variables above.
 
   /**
    * Creates a priority queue.
@@ -43,6 +41,7 @@ public class MinPriorityQueue<T extends Comparable<? super T>> implements Priori
 
   /**
    * Returns if the priority queue is empty.
+   *
    * @return a boolean representing if the priority queue is empty
    */
   public boolean isEmpty() {
@@ -51,6 +50,7 @@ public class MinPriorityQueue<T extends Comparable<? super T>> implements Priori
 
   /**
    * Returns the size of the priority queue.
+   *
    * @return the size of the priority queue
    */
   public int size() {
@@ -65,14 +65,11 @@ public class MinPriorityQueue<T extends Comparable<? super T>> implements Priori
   }
 
   /**
-   * Used for grading purposes only.
-   *
-   * DO NOT USE OR EDIT THIS METHOD!
+   * METHOD FOR TESTING.
    *
    * @return the backing heap
    */
   public HeapInterface<T> getBackingHeap() {
-      // DO NOT CHANGE THIS METHOD!
       return backingHeap;
   }
 }

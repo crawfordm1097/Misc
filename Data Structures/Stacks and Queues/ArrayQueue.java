@@ -6,7 +6,6 @@ import java.util.NoSuchElementException;
  * @author Mikayla Crawford
  */
 public class ArrayQueue<T> implements QueueInterface<T> {
-  // Do not add new instance variables.
   private T[] backingArray;
   private int front;
   private int back;
@@ -23,11 +22,7 @@ public class ArrayQueue<T> implements QueueInterface<T> {
   }
 
   /**
-   * Dequeue from the front of the queue.
-   *
-   * Do not shrink the backing array.
-   * If the queue becomes empty as a result of this call, you <b>must not</b>
-   * explicitly reset front or back to 0.
+   * Dequeue from the front of the queue. The backing array is not shrunk.
    *
    * @see QueueInterface#dequeue():
    * This method should be implemented in O(1) time.
@@ -47,12 +42,8 @@ public class ArrayQueue<T> implements QueueInterface<T> {
   }
 
   /**
-   * Add the given data to the queue.
-   *
-   * If sufficient space is not available in the backing array, you should
-   * regrow it to 1.5 times the current backing array length, rounding down
-   * if necessary. If a regrow is necessary, you should copy elements to the
-   * front of the new array and reset front to 0.
+   * Add the given data to the queue. If the queue is full, the backing array
+   * is regrown to 1.5 its size. If this occurs, the front is reset to 0.
    *
    * @see QueueInterface#enqueue(T):
    * This method should be implemented in amortized O(1) time.
@@ -90,7 +81,7 @@ public class ArrayQueue<T> implements QueueInterface<T> {
   /**
    * Return true if this queue contains no elements, false otherwise.
    *
-   * This method should be implemented in O(1) time.
+   * O(1) time.
    *
    * @return true if the queue is empty; false otherwise
    */
@@ -101,7 +92,7 @@ public class ArrayQueue<T> implements QueueInterface<T> {
   /**
    * Return the size of the queue.
    *
-   * This method should be implemented in O(1) time.
+   * O(1) time.
    *
    * @return number of items in the queue
    */
@@ -110,13 +101,11 @@ public class ArrayQueue<T> implements QueueInterface<T> {
   }
 
   /**
-   * Returns the backing array of this queue.
-   * Normally, you would not do this, but included for testing.
+   * Returns the backing array of this queue. Used for testing.
    *
    * @return the backing array
    */
   public Object[] getBackingArray() {
-      // DO NOT MODIFY!
       return backingArray;
   }
 }

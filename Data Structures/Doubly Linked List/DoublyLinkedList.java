@@ -3,7 +3,6 @@
   */
 
 public class DoublyLinkedList<T> implements LinkedListInterface<T> {
-  // Do not add new instance variables.
   private LinkedListNode<T> head;
   private LinkedListNode<T> tail;
   private int size;
@@ -46,9 +45,9 @@ public class DoublyLinkedList<T> implements LinkedListInterface<T> {
   }
 
   /**
-   * Adds the element to the front of the list. Make sure to update head.
+   * Adds the element to the front of the list.
    *
-   * Must be O(1) for all cases.
+   * O(1) for all cases.
    *
    * @param data The data for the new element.
    * @throws java.lang.IllegalArgumentException if data is null.
@@ -70,9 +69,9 @@ public class DoublyLinkedList<T> implements LinkedListInterface<T> {
   }
 
   /**
-   * Adds the element to the back of the list. Make sure to update tail.
+   * Adds the element to the back of the list.
    *
-   * Must be O(1) for all cases.
+   * O(1) for all cases.
    *
    * @param data The data for the new element.
    * @throws java.lang.IllegalArgumentException if data is null.
@@ -135,10 +134,10 @@ public class DoublyLinkedList<T> implements LinkedListInterface<T> {
   }
 
   /**
-   * Removes and returns the element at the front of the list. If the list is
-   * empty, return {@code null}.
+   * Removes and returns the element at the front of the list. Returns null if
+   * the list is empty.
    *
-   * Must be O(1) for all cases.
+   * O(1) for all cases.
    *
    * @return The object formerly located at the front.
    */
@@ -161,10 +160,10 @@ public class DoublyLinkedList<T> implements LinkedListInterface<T> {
   }
 
   /**
-   * Removes and returns the element at the back of the list. If the list is
-   * empty, return {@code null}.
+   * Removes and returns the element at the back of the list. Returns null if
+   * the list is empty.
    *
-   * Must be O(1) for all cases.
+   * O(1) for all cases.
    *
    * @return The object formerly located at the back.
    */
@@ -189,7 +188,7 @@ public class DoublyLinkedList<T> implements LinkedListInterface<T> {
   /**
    * Removes every copy of the given data from the list.
    *
-   * Must be O(n) for all cases.
+   * O(n) for all cases.
    *
    * @param data The data to be removed from the list.
    * @return true if something was removed from the list; false otherwise.
@@ -258,7 +257,7 @@ public class DoublyLinkedList<T> implements LinkedListInterface<T> {
   /**
    * Returns an array representation of the linked list.
    *
-   * Must be O(n) for all cases.
+   *  O(n) for all cases.
    *
    * @return An array of length {@code size} holding all of the objects in
    * this list in the same order.
@@ -279,7 +278,7 @@ public class DoublyLinkedList<T> implements LinkedListInterface<T> {
   /**
    * Returns a boolean value indicating if the list is empty.
    *
-   * Must be O(1) for all cases.
+   * O(1) for all cases.
    *
    * @return true if empty; false otherwise.
    */
@@ -290,7 +289,7 @@ public class DoublyLinkedList<T> implements LinkedListInterface<T> {
   /**
    * Returns the number of elements in the list.
    *
-   * Must be O(1) for all cases.
+   * O(1) for all cases.
    *
    * @return The size of the list.
    */
@@ -301,7 +300,7 @@ public class DoublyLinkedList<T> implements LinkedListInterface<T> {
   /**
    * Clears the list of all data.
    *
-   * Must be O(1) for all cases.
+   * O(1) for all cases.
    */
   public void clear() {
     head = null; //Resets head
@@ -310,28 +309,20 @@ public class DoublyLinkedList<T> implements LinkedListInterface<T> {
   }
 
   /**
-   * Returns the head node of the linked list.
-   * Normally, you would not do this, but we need it for grading your work.
-   *
-   * DO NOT USE THIS METHOD IN YOUR CODE.
+   * Returns the head node of the linked list. Used for testing.
    *
    * @return Node at the head of the linked list.
    */
   public LinkedListNode<T> getHead() {
-      // DO NOT MODIFY!
       return head;
   }
 
   /**
-   * Returns the tail node of the linked list.
-   * Normally, you would not do this, but we need it for grading your work.
-   *
-   * DO NOT USE THIS METHOD IN YOUR CODE.
+   * Returns the tail node of the linked list. Used for testing.
    *
    * @return Node at the tail of the linked list.
    */
   public LinkedListNode<T> getTail() {
-      // DO NOT MODIFY!
       return tail;
   }
 }

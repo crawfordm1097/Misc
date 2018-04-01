@@ -1,16 +1,14 @@
-/* This class implements the ArrayListInterface
-@author Mikayla Crawford
-*/
 
+/** This class implements an array list.
+  *
+  * @author Mikayla Crawford
+  */
 public class ArrayList<T> implements ArrayListInterface<T> {
-  // Do not add new instance variables.
   private T[] backingArray;
   private int size;
 
   /**
    * Constructs a new ArrayList.
-   *
-   * You may add statements to this method.
    */
   public ArrayList() {
       backingArray = (T[]) new Object[INITIAL_CAPACITY];
@@ -18,9 +16,8 @@ public class ArrayList<T> implements ArrayListInterface<T> {
   }
 
   /**
-   * Adds the element to the index specified.
+   * Adds the element to the index specified. It shifts elements up if need be.
    *
-   * Remember that this add may require elements to be shifted.
    * Adding to index {@code size} should be O(1), all other adds are O(n).
    *
    * @param index The index where you want the new element.
@@ -63,10 +60,10 @@ public class ArrayList<T> implements ArrayListInterface<T> {
   }
 
   /**
-   * Add the given data to the front of your array list.
+   * Add the given data to the front of your array list. Shifts elements if
+   * needed.
    *
-   * Remember that this add may require elements to be shifted.
-   * Must be O(n).
+   * Is O(n).
    *
    * @param data The data to add to the list.
    * @throws java.lang.IllegalArgumentException if data is null.
@@ -100,9 +97,9 @@ public class ArrayList<T> implements ArrayListInterface<T> {
   }
 
   /**
-   * Add the given data to the back of your array list.
+   * Add the given data to the back of the array list.
    *
-   * Must be O(1).
+   * Is O(1).
    *
    * @param data The data to add to the list.
    * @throws java.lang.IllegalArgumentException if data is null.
@@ -130,7 +127,7 @@ public class ArrayList<T> implements ArrayListInterface<T> {
   /**
    * Returns the element at the given index.
    *
-   * Must be O(1).
+   * Is O(1).
    *
    * @param index The index of the element
    * @return The data stored at that index.
@@ -144,9 +141,8 @@ public class ArrayList<T> implements ArrayListInterface<T> {
   }
 
   /**
-   * Removes and returns the element at index.
+   * Removes and returns the element at index. Elements are shifted if needed.
    *
-   * Remember that this remove may require elements to be shifted.
    * This method should be O(1) for index {@code size}, and O(n) in all other
    * cases.
    *
@@ -176,11 +172,10 @@ public class ArrayList<T> implements ArrayListInterface<T> {
   }
 
   /**
-   * Remove the first element in the list and return it.
+   * Remove the first element in the list and return it. Returns null if the
+   * list is empty. Shifts elements if needed.
    *
-   * If the list is empty, return {@code null}.
-   * Remember that this remove may require elements to be shifted.
-   * Must be O(n).
+   * Is O(n).
    *
    * @return The data from the front of the list or null.
    */
@@ -201,10 +196,10 @@ public class ArrayList<T> implements ArrayListInterface<T> {
   }
 
   /**
-   * Remove the last element in the list and return it.
+   * Remove the last element in the list and return it. Returns null if the
+   * list is empty.
    *
-   * If the list is empty, return {@code null}.
-   * Must be O(1).
+   * Is O(1).
    *
    * @return The data from the back of the list or null.
    */
@@ -222,7 +217,7 @@ public class ArrayList<T> implements ArrayListInterface<T> {
   /**
    * Return a boolean value representing whether or not the list is empty.
    *
-   * Must be O(1).
+   * Is O(1).
    *
    * @return true if empty; false otherwise
    */
@@ -233,7 +228,7 @@ public class ArrayList<T> implements ArrayListInterface<T> {
   /**
    * Return the size of the list as an integer.
    *
-   * Must be O(1).
+   * Is O(1).
    *
    * @return The size of the list.
    */
@@ -245,7 +240,7 @@ public class ArrayList<T> implements ArrayListInterface<T> {
    * Clear the list. Reset the backing array to a new array of the initial
    * capacity.
    *
-   * Must be O(1).
+   * Is O(1).
    */
   public void clear() {
     backingArray = (T[]) new Object[backingArray.length]; //Resets the backing array
@@ -253,15 +248,11 @@ public class ArrayList<T> implements ArrayListInterface<T> {
   }
 
   /**
-   * Return the backing array for this list.
-   *
-   * Must be O(1).
-   * For grading purposes only. DO NOT USE THIS METHOD IN YOUR CODE!
+   * Return the backing array for this list. Used for testing.
    *
    * @return the backing array for this list
    */
   public Object[] getBackingArray() {
-      // DO NOT MODIFY.
       return backingArray;
   }
 }

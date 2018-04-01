@@ -14,8 +14,6 @@ public class MinHeap<T extends Comparable<? super T>> implements HeapInterface<T
   /**
    * Creates a Heap with an initial size of {@code STARTING_SIZE} for the
    * backing array.
-   *
-   * Use the constant field in the interface. Do not use magic numbers!
    */
   public MinHeap() {
       backingArray = (T[]) new Comparable[STARTING_SIZE];
@@ -23,9 +21,8 @@ public class MinHeap<T extends Comparable<? super T>> implements HeapInterface<T
   }
 
   /**
-   * Adds an item to the heap. If the backing array is full and you're trying
-   * to add a new item, then increase its size by 1.5 times, rounding down
-   * if necessary. No duplicates will be added.
+   * Adds an item to the heap. Increases the backing arrays size by 1.5 if it
+   * is full.
    *
    * @throws IllegalArgumentException if the item is null
    * @param item the item to be added to the heap
@@ -67,7 +64,7 @@ public class MinHeap<T extends Comparable<? super T>> implements HeapInterface<T
   }
 
   /**
-   * Removes and returns the first item of the heap. Do not decrease the size
+   * Removes and returns the first item of the heap. Does not decrease the size
    * of the backing array.
    *
    * @throws java.util.NoSuchElementException if the heap is empty
@@ -111,6 +108,7 @@ public class MinHeap<T extends Comparable<? super T>> implements HeapInterface<T
 
   /**
    * Returns if the heap is empty or not.
+   *
    * @return a boolean representing if the heap is empty
    */
   public boolean isEmpty() {
@@ -119,6 +117,7 @@ public class MinHeap<T extends Comparable<? super T>> implements HeapInterface<T
 
   /**
    * Returns the size of the heap.
+   *
    * @return the size of the heap
    */
   public int size() {
@@ -134,14 +133,11 @@ public class MinHeap<T extends Comparable<? super T>> implements HeapInterface<T
   }
 
   /**
-   * Used for grading purposes only.
-   *
-   * DO NOT USE OR EDIT THIS METHOD!
+   * METHOD USED FOR TESTING.
    *
    * @return the backing array
    */
   public Comparable[] getBackingArray() {
-      // DO NOT CHANGE THIS METHOD!
       return backingArray;
   }
 }

@@ -112,8 +112,6 @@ public interface AVLInterface<T extends Comparable<? super T>> {
 
     /**
      * THIS METHOD IS ONLY FOR TESTING PURPOSES.
-     * DO NOT USE IT IN YOUR CODE
-     * DO NOT CHANGE THIS METHOD
      *
      * @return the root of the tree
      */

@@ -11,7 +11,6 @@ import java.util.LinkedList;
  * @author Mikayla Crawford
  */
 public class BST<T extends Comparable<? super T>> implements BSTInterface<T> {
-  // DO NOT ADD OR MODIFY INSTANCE VARIABLES.
   private BSTNode<T> root;
   private int size;
 
@@ -43,12 +42,11 @@ public class BST<T extends Comparable<? super T>> implements BSTInterface<T> {
   }
 
   /**
-   * Add the data as a leaf in the BST.  Should traverse the tree to find the
-   * appropriate location. If the data is already in the tree, then nothing
-   * should be done (the duplicate shouldn't get added, and size should not be
-   * incremented).
+   * Add the data as a leaf in the BST. If the data is already in the tree,
+   * nothing is done.
+   *
    * Should have a running time of O(log n) for a balanced tree, and a worst
-   * case of O(n).7
+   * case of O(n).
    *
    * @throws IllegalArgumentException if the data is null
    * @param data the data to be added
@@ -95,16 +93,9 @@ public class BST<T extends Comparable<? super T>> implements BSTInterface<T> {
   }
 
   /**
-   * Removes the data from the tree.  There are 3 cases to consider:
-   * 1: the data is a leaf.  In this case, simply remove it.
-   * 2: the data has one child.  In this case, simply replace it with its
-   * child.
-   * 3: the data has 2 children.  There are generally two approaches:
-   * replacing the data with either the largest element that is smaller than
-   * the element being removed (commonly called the predecessor), or replacing
-   * it with the smallest element that is larger than the element being
-   * removed (commonly called the successor). For this assignment, use the
-   * predecessor.
+   * Removes the data from the tree. If the node has two children, it is
+   * replaced with its predecessor.
+   *
    * Should have a running time of O(log n) for a balanced tree, and a worst
    * case of O(n).
    *
@@ -147,6 +138,7 @@ public class BST<T extends Comparable<? super T>> implements BSTInterface<T> {
 
   /**
    * Helper method for node removal. It handles the specific removal cases.
+   *
    * @param parent the nodes parent
    * @param nodeToRemove the node to remove
    * @param leftSide true if the node is on the left of the parent, false otherwise
@@ -191,8 +183,8 @@ public class BST<T extends Comparable<? super T>> implements BSTInterface<T> {
   }
 
   /**
-   * Returns the data in the tree matching the parameter passed in (think
-   * carefully: should you use .equals or == ?).
+   * Returns the data in the tree matching the parameter passed in.
+   *
    * Should have a running time of O(log n) for a balanced tree, and a worst
    * case of O(n).
    *
@@ -214,7 +206,9 @@ public class BST<T extends Comparable<? super T>> implements BSTInterface<T> {
 
   /**
    * Helper method for finding a specific node in the tree.
+   *
    * Running time of O(log n) for balanced tree, and worst case of O(n).
+   *
    * @param data the data to search for
    * @return the node that matches or null if no node was found
    */
@@ -239,6 +233,7 @@ public class BST<T extends Comparable<? super T>> implements BSTInterface<T> {
 
   /**
    * Returns whether or not the parameter is contained within the tree.
+   *
    * Should have a running time of O(log n) for a balanced tree, and a worst
    * case of O(n).
    *
@@ -273,6 +268,7 @@ public class BST<T extends Comparable<? super T>> implements BSTInterface<T> {
 
   /**
    * Helper method for preorder traversal.
+   *
    * @param node the node to preorder
    * @param list the list to add the data to
    * @return the postordered list
@@ -307,6 +303,7 @@ public class BST<T extends Comparable<? super T>> implements BSTInterface<T> {
 
   /**
    * Helper method for postorder traversal.
+   *
    * @param node the node to postorder
    * @param list the list to add the data to
    * @return the postordered list
@@ -342,6 +339,7 @@ public class BST<T extends Comparable<? super T>> implements BSTInterface<T> {
 
   /**
    * Helper method for inorder traversal.
+   *
    * @param node the node to inorder
    * @param list the list to add the data to
    * @return the inordered list
@@ -368,11 +366,6 @@ public class BST<T extends Comparable<? super T>> implements BSTInterface<T> {
   /**
    * Generate a level-order traversal of the tree.
    *
-   * To do this, add the root node to a queue. Then, while the queue isn't
-   * empty, remove one node, add its data to the list being returned, and add
-   * its left and right child nodes to the queue. If what you just removed is
-   * {@code null}, ignore it and continue with the rest of the nodes.
-   *
    * Should run in O(n).
    *
    * @return a level order traversal of the tree
@@ -397,7 +390,7 @@ public class BST<T extends Comparable<? super T>> implements BSTInterface<T> {
   }
 
   /**
-   * Clear the tree.  Should be O(1).
+   * Clear the tree. Should be O(1).
    */
   public void clear() {
     root = null;
@@ -405,9 +398,8 @@ public class BST<T extends Comparable<? super T>> implements BSTInterface<T> {
   }
 
   /**
-   * Calculate and return the height of the root of the tree.  A node's
-   * height is defined as {@code max(left.height, right.height) + 1}. A leaf
-   * node has a height of 0.
+   * Calculate and return the height of the root of the tree.
+   *
    * Should be calculated in O(n).
    *
    * @return the height of the root of the tree, -1 if the tree is empty
@@ -418,7 +410,9 @@ public class BST<T extends Comparable<? super T>> implements BSTInterface<T> {
 
   /**
    * Helper method for recursively determining the height off a specific node
+   *
    * Calculated in O(n).
+   *
    * @param node the node to determine the height of
    */
   private int height(BSTNode<T> node) {
@@ -439,9 +433,6 @@ public class BST<T extends Comparable<? super T>> implements BSTInterface<T> {
    * @return the root of the tree
    */
   public BSTNode<T> getRoot() {
-      // DO NOT EDIT THIS METHOD!
       return root;
   }
-
-
 }

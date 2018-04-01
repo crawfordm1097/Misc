@@ -85,7 +85,7 @@ public class MapEntry<K, V> {
 
     @Override
     public boolean equals(Object o) {
-        // DO NOT USE THIS METHOD IN YOUR CODE!  This is for testing ONLY!
+        //This is for testing ONLY!
         if (!(o instanceof MapEntry)) {
             return false;
         } else {
