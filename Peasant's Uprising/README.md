@@ -1,8 +1,6 @@
 # Welcome to Peasant's Uprising!
 
-Humans play against Orcz in this CL fantasy version of chess. To run the game, please run the makefile.
-
-Gameplay is similar to the classic game, but there are some unique changes with the pieces in the inclusion of special cards.
+Humans play against Orcz in this CL fantasy version of chess. To run the game, please run the makefile. Gameplay is similar to the classic game, but there are some unique changes with the pieces in the inclusion of special cards.
 
 ### Pieces
 Each team has 16 pieces, as follows:
