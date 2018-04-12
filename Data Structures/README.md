@@ -1,4 +1,4 @@
-## Various data structures and algorithms I have implemented.
+## Featured Data Structures and Algorithms
 
 * Data Structures:
   * Array List
@@ -10,7 +10,7 @@
   * Min Priority Queue
   * Stack
     * Array backed
-    * List backd
+    * List backed
   * Queue
     * Array backed
     * List backed
@@ -27,3 +27,8 @@
     * Boyer-Moore
     * Knuth-Morris-Pratt
     * Rabin-Karp
+  * Graph Algorithms (*in progress*)
+    * Breadth First Search
+    * Depth First Search
+    * Dijkstra's Algorithm
+    * Kruskal's Minimum Spanning Tree
