@@ -32,5 +32,5 @@
     * Depth First Search
     * Dijkstra's Shortest Path
     * Kruskal's Minimum Spanning Tree
-  * Compression Algorithms (*in progress*)
+  * Compression Algorithms
     * Huffman Encoding
