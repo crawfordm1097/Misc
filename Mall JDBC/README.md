@@ -20,5 +20,4 @@ The Mall database consists of 7 relations, described below.
 Click the "Advanced" button at the top of the page. From there, enter any SQL statement you would like to execute. If there was an error in your syntax, the error will be displayed for your reference. Otherwise, the resulting table will be displayed.
 
 ### Inexperienced Users
-Use the tabs at the top to look at each table in the database. To refine the columns displayed, use the radio buttons below the table. 
-*IN PROGRESS* : search, update, insert, and delete functionality
+Use the tabs at the top to look at each table in the database. To refine the columns displayed, use the radio buttons below the table. To perform a query or update, specify the conditions with the dropdowns and inputs for each attribute. Then, specify the action as a "Search" or "Update". If it is an update, you will be prompted for what value to change.
