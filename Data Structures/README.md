@@ -27,10 +27,10 @@
     * Boyer-Moore
     * Knuth-Morris-Pratt
     * Rabin-Karp
-  * Graph Algorithms (*in progress*)
+  * Graph Algorithms
     * Breadth First Search
     * Depth First Search
-    * Dijkstra's Algorithm
+    * Dijkstra's Shortest Path
     * Kruskal's Minimum Spanning Tree
   * Compression Algorithms (*in progress*)
     * Huffman Encoding
