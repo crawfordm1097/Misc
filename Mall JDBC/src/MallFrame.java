@@ -23,6 +23,7 @@ public class MallFrame extends JFrame {
   private JPanel mainPane;
   private JTable[] tables;
 
+
   /**
     * Default constructor for the Mall GUI.
     */
@@ -179,16 +180,17 @@ public class MallFrame extends JFrame {
       JPanel inputPanel = new JPanel(new GridLayout(columnCount, 3, 25, 10));
       JTextField inputs[] = new JTextField[columnCount];
       JComboBox dropdowns[] = new JComboBox[columnCount];
+      JRadioButton btns[] = new JRadioButton[columnCount];
       String eqlsVals[] = new String[]{"=", "<", ">"};
 
       //Creates radio buttons and input for each attribute
       int count = 0; //Tracks index of curr column
       for (String attr : colNames) {
         //Create and add button initliazed to selected
-        JRadioButton btn = new JRadioButton(attr);
-        btn.setSelected(true);
-        btn.addActionListener(new ColBtnAction(tables[i], tables[i].getColumnModel().getColumn(count), true)); //Tie listener
-        rBtnPanel.add(btn);
+        btns[count] = new JRadioButton(attr);
+        btns[count].setSelected(true);
+        btns[count].addActionListener(new ColBtnAction(tables[i], tables[i].getColumnModel().getColumn(count), true)); //Tie listener
+        rBtnPanel.add(btns[count]);
 
         //Creates and adds inputs with labels and dropdowns
         JPanel comboPanel = new JPanel();
@@ -221,25 +223,51 @@ public class MallFrame extends JFrame {
         public void actionPerformed(ActionEvent e) {
           try {
             boolean typed = false;
-            String sql = "SELECT * FROM " + name + " WHERE ";
+            boolean firstAttr = true;
+            String begSql = "";
+            String endSql = "";
 
-            //Builds WHERE clause
+            JTable tempTable = new JTable(dao.getTuples(name)) {
+              @Override
+              public Class<?> getColumnClass(int column) {
+                String name = this.getColumnName(column);
+
+                if (name.contains("id") || name.contains("quantity")) {
+                  return Integer.class;
+                } else if (name.contains("salary") || name.contains("balance") || name.contains("price")) {
+                  return java.math.BigDecimal.class;
+                } else {
+                  return String.class;
+                }
+              }
+            };
+
+            //Loops through all attributes
             int i = 0;
             for (String attr : colNames) {
-              Boolean stringAttr = String.class.isAssignableFrom(tables[tabbedPane.getSelectedIndex()].getColumnClass(i));
+              Boolean stringAttr = String.class.isAssignableFrom(tempTable.getColumnClass(i));
 
+              //Builds WHERE clause
               if (typed && !inputs[i].getText().isEmpty()) {
-                sql += " AND " + attr + dropdowns[i].getSelectedItem() + (stringAttr ? "'" : "") + inputs[i].getText() + (stringAttr ? "'" : "");
+                endSql += " AND " + attr + dropdowns[i].getSelectedItem() + (stringAttr ? "'" : "") + inputs[i].getText() + (stringAttr ? "'" : "");
               } else if (!inputs[i].getText().isEmpty()) {
-                sql += attr + dropdowns[i].getSelectedItem() + (stringAttr ? "'" : "") + inputs[i].getText() + (stringAttr ? "'" : "");
+                endSql += attr + dropdowns[i].getSelectedItem() + (stringAttr ? "'" : "") + inputs[i].getText() + (stringAttr ? "'" : "");
                 typed = true;
+              }
+
+              //Finds attributes to select
+              if (btns[i].isSelected() && firstAttr) {
+                firstAttr = false;
+                begSql += btns[i].getText();
+              } else if (btns[i].isSelected()){
+                begSql += ", " + btns[i].getText();
               }
               i++;
             }
 
             //If an input was typed
             if (typed) {
-              DefaultTableModel result = dao.getTableFromQuery(sql);
+              DefaultTableModel result = dao.getTableFromQuery("SELECT " + begSql + " FROM " + name + " WHERE " + endSql);
               JTable table = new JTable(result) {
                 public Dimension getPreferredScrollableViewportSize() {
                   return new Dimension(500, 150);
