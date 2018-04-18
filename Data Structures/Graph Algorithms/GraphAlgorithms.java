@@ -183,7 +183,7 @@ public class GraphAlgorithms {
      * Runs Kruskal's algorithm on the given graph and returns the minimum
      * spanning tree in the form of a set of Edges. If the graph is
      * disconnected, and therefore there is no valid MST, it returns null. It
-     * is intended for an undirected graph.
+     * is intended for an undirected graph and works better for a sparse graph.
      *
      * @throws IllegalArgumentException if graph is null
      * @param graph the Graph we are searching
@@ -191,7 +191,7 @@ public class GraphAlgorithms {
      * @return the MST of the graph; null if no valid MST exists.
      */
     public static <T> Set<Edge<T>> kruskals(Graph<T> graph) {
-      if (graph == null) throw new IllegalArgumentException("Cannot find MST of null graph.");
+      if (graph == null) throw new IllegalArgumentException("Cannot find MST of null graph with Kruskal's.");
       Set<Edge<T>> mst = new HashSet<Edge<T>>();
       Map<Vertex<T>, DisjointSet> pos = new HashMap<Vertex<T>, DisjointSet>(); //Tracks each vertices' DisjointSet
       PriorityQueue<Edge<T>> edgeQueue = new PriorityQueue<Edge<T>>();
@@ -220,6 +220,66 @@ public class GraphAlgorithms {
         if (vSet.find() != uSet.find()) {
           vSet.union(uSet); //Merge sets
           mst.add(minEdge); //Add edge
+        }
+      }
+
+      //If the graph is disconnected (less edges in MST than there are edges) -> final catch
+      if (mst.size() < ajList.size() - 1) return null;
+
+      return mst;
+    }
+
+    /**
+     * Runs Prim's algorithm on the given graph and returns the minimum
+     * spanning tree in the form of a set of Edges. If the graph is
+     * disconnected, and therefore there is no valid MST, it returns null. It
+     * is intended for an undirected graph and works better for a dense graph.
+     *
+     * @throws IllegalArgumentException if vertex or graph is null
+     * @param start the Vertex to start the MST search at
+     * @param graph the Graph we are searching
+     * @param <T> the data type representing the vertices in the graph.
+     * @return the MST of the graph; null if no valid MST exists.
+     */
+    public static <T> Set<Edge<T>> prims(Vertex<T> start, Graph<T> graph) {
+      if (start == null || graph == null) throw new IllegalArgumentException("Cannot find MST of null graph with Prim's.");
+      Set<Edge<T>> mst = new HashSet<Edge<T>>();
+      Set<Vertex<T>> notFound = new HashSet<Vertex<T>>();
+      PriorityQueue<Edge<T>> edgeQueue = new PriorityQueue<Edge<T>>();
+      Map<Vertex<T>, List<VertexDistancePair<T>>> ajList = graph.getAdjacencyList();
+
+      //If the graph is disconnected (less edges than vertices - 1) -> initial catch
+      if (graph.getEdgeList().size() < ajList.keySet().size() - 1) return null;
+
+      //Initliaze all vertices as not found
+      for (Vertex<T> vert : ajList.keySet()) {
+        notFound.add(vert);
+      }
+
+      //Adds all non-loop edges from start to edgeQueue
+      for (VertexDistancePair<T> vdp : ajList.get(start)) {
+        if (!vdp.getVertex().equals(start)) edgeQueue.add(new Edge(start, vdp.getVertex(), vdp.getDistance(), false));
+      }
+
+      notFound.remove(start);
+
+      //Loops while the queue isn't empty
+      while (!edgeQueue.isEmpty()) {
+        Edge<T> curr = edgeQueue.poll();
+        Vertex<T> v = curr.getV();
+        Vertex<T> u = curr.getU();
+
+        //Curr edge is valid
+        if (notFound.contains(u) ^ notFound.contains(v)) {
+          mst.add(curr); //Add to MST
+
+          Vertex<T> newVertex = (notFound.contains(v) ? v : u);
+          notFound.remove(newVertex);
+
+          //Loops through all new adjacent vertices
+          for (VertexDistancePair<T> pair : ajList.get(newVertex)) {
+            edgeQueue.add(new Edge(newVertex, pair.getVertex(), pair.getDistance(), false));
+          }
         }
       }
 
