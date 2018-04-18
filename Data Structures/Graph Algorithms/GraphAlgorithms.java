@@ -91,7 +91,7 @@ public class GraphAlgorithms {
 
     /**
       * Helper recursive function for a DFS. Other ways to implement the search
-      * include performing a BFS with stacks instead of queues.
+      * include using explicit stacks instead of the program stack.
       *
       * @param vertex the vertex to perform the DFS on
       * @param ajMap the map of all adjacency lists
