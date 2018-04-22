@@ -1,3 +1,10 @@
+/*
+  Mikayla Crawford
+  7776
+  12
+  April 29, 2018
+*/
+
 -- MySQL dump 10.16  Distrib 10.2.12-MariaDB, for Win64 (AMD64)
 --
 -- Host: localhost    Database: Mall
@@ -25,7 +32,7 @@ DROP TABLE IF EXISTS `accounts`;
 CREATE TABLE `accounts` (
   `aid` int(8) NOT NULL,
   `balance` decimal(8,2) DEFAULT NULL,
-  `type` varchar(8) DEFAULT NULL CHECK (`type` = 'credit' or `type` = 'checking' or `type` = 'cash'),
+  `type` varchar(8) DEFAULT NULL,
   PRIMARY KEY (`aid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -39,6 +46,56 @@ LOCK TABLES `accounts` WRITE;
 INSERT INTO `accounts` VALUES (11432584,153.16,'cash'),(12312315,3014.23,'cash'),(21553694,1602.03,'credit'),(31497325,1207.38,'checking'),(34972168,3821.49,'credit'),(66666666,301658.23,'cash'),(81354922,23.01,'checking');
 /*!40000 ALTER TABLE `accounts` ENABLE KEYS */;
 UNLOCK TABLES;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = cp850 */ ;
+/*!50003 SET character_set_results = cp850 */ ;
+/*!50003 SET collation_connection  = cp850_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER AccountInsert
+BEFORE INSERT ON Accounts
+FOR EACH ROW
+BEGIN
+  IF (NEW.type <> 'credit'
+    AND NEW.type <> 'checking'
+    AND NEW.type <> 'cash')
+  THEN
+    SET NEW.type = 'cash';
+  END IF;
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = cp850 */ ;
+/*!50003 SET character_set_results = cp850 */ ;
+/*!50003 SET collation_connection  = cp850_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER AccountTypeUpdate
+BEFORE UPDATE ON Accounts
+FOR EACH ROW
+BEGIN
+  IF (NEW.type <> 'credit'
+    AND NEW.type <> 'checking'
+    AND NEW.type <> 'cash')
+  THEN
+    SET NEW.type = 'cash';
+  END IF;
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
 -- Table structure for table `customers`
@@ -51,7 +108,9 @@ CREATE TABLE `customers` (
   `name` varchar(50) NOT NULL,
   `address` varchar(50) DEFAULT NULL,
   `aid` int(8) NOT NULL,
-  PRIMARY KEY (`name`,`aid`)
+  PRIMARY KEY (`name`,`aid`),
+  KEY `aid` (`aid`),
+  CONSTRAINT `customers_ibfk_1` FOREIGN KEY (`aid`) REFERENCES `accounts` (`aid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -101,7 +160,10 @@ DROP TABLE IF EXISTS `employs`;
 CREATE TABLE `employs` (
   `store` varchar(50) NOT NULL,
   `eid` int(3) NOT NULL,
-  PRIMARY KEY (`store`,`eid`)
+  PRIMARY KEY (`store`,`eid`),
+  KEY `eid` (`eid`),
+  CONSTRAINT `employs_ibfk_1` FOREIGN KEY (`eid`) REFERENCES `employees` (`eid`),
+  CONSTRAINT `employs_ibfk_2` FOREIGN KEY (`store`) REFERENCES `stores` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -125,8 +187,11 @@ DROP TABLE IF EXISTS `inventory`;
 CREATE TABLE `inventory` (
   `name` varchar(50) NOT NULL,
   `item` varchar(25) NOT NULL,
-  `quanity` int(4) DEFAULT NULL,
-  PRIMARY KEY (`name`,`item`)
+  `quantity` int(4) DEFAULT NULL,
+  PRIMARY KEY (`name`,`item`),
+  KEY `item` (`item`),
+  CONSTRAINT `inventory_ibfk_1` FOREIGN KEY (`name`) REFERENCES `stores` (`name`),
+  CONSTRAINT `inventory_ibfk_2` FOREIGN KEY (`item`) REFERENCES `items` (`item`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -136,9 +201,36 @@ CREATE TABLE `inventory` (
 
 LOCK TABLES `inventory` WRITE;
 /*!40000 ALTER TABLE `inventory` DISABLE KEYS */;
-INSERT INTO `inventory` VALUES ('Dillards','Dryer',5),('Dillards','Gator T-Shirt',9),('Dillards','Large Autumn Candle',5),('Dillards','Men\'s Fitted Suit',6),('Dillards','Washer',3),('Dillards','Winter Boots',30),('Foot Court','Sandwich',301),('Footlocker','NMD R1',30),('Footlocker','Ultra Boost X',20),('JC-Pennys','Dryer',0),('JC-Pennys','Gator T-Shirt',1),('JC-Pennys','Magic Kit',2),('JC-Pennys','Washer',5),('Leaf Village','Jitsu Scroll',2),('Patty\'s Pub','Coors Light',1000),('Patty\'s Pub','Egg',1000),('Starbucks','Cake Pop',79),('Starbucks','Croissant',243),('Starbucks','Hot Coffee',2000),('Starbucks','Iced Coffee',2000),('The Magic Shop','Magic Kit',100),('The Shire','Mead',90),('The Shire','Sandwich',37),('The Swamp','Gator T-Shirt',12),('Yankee Candle','Large Autumn Candle',8),('Yankee Candle','Pine Wax Melt',9);
+INSERT INTO `inventory` VALUES ('Dillards','Dryer',5),('Dillards','Gator T-Shirt',9),('Dillards','Large Autumn Candle',5),('Dillards','Men\'s Fitted Suit',6),('Dillards','Washer',3),('Dillards','Winter Boots',30),('Food Court','Sandwich',301),('Footlocker','NMD R1',30),('Footlocker','Ultra Boost X',20),('JC-Pennys','Dryer',0),('JC-Pennys','Gator T-Shirt',1),('JC-Pennys','Magic Kit',2),('JC-Pennys','Washer',5),('Leaf Village','Jitsu Scroll',2),('Patty\'s Pub','Coors Light',1000),('Patty\'s Pub','Egg',1000),('Starbucks','Cake Pop',79),('Starbucks','Croissant',243),('Starbucks','Hot Coffee',2000),('Starbucks','Iced Coffee',2000),('The Magic Shop','Magic Kit',100),('The Shire','Mead',90),('The Shire','Sandwich',37),('The Swamp','Gator T-Shirt',12),('Yankee Candle','Large Autumn Candle',8),('Yankee Candle','Pine Wax Melt',9);
 /*!40000 ALTER TABLE `inventory` ENABLE KEYS */;
 UNLOCK TABLES;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = cp850 */ ;
+/*!50003 SET character_set_results = cp850 */ ;
+/*!50003 SET collation_connection  = cp850_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER InventoryInsert
+BEFORE INSERT ON Inventory
+FOR EACH ROW
+BEGIN
+  DECLARE avgPrice DECIMAL(8, 2);
+  SET FOREIGN_KEY_CHECKS = 0;
+  IF (NEW.item NOT IN (SELECT item FROM Items))
+  THEN
+    SET avgPrice = (SELECT AVG(price) FROM Items);
+    INSERT INTO Items(item, brand, price) VALUES (NEW.item, 'generic', avgPrice);
+  END IF;
+  SET FOREIGN_KEY_CHECKS = 1;
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
 -- Table structure for table `items`
@@ -161,7 +253,7 @@ CREATE TABLE `items` (
 
 LOCK TABLES `items` WRITE;
 /*!40000 ALTER TABLE `items` DISABLE KEYS */;
-INSERT INTO `items` VALUES ('Cake Pop','Starbucks',1.56),('Coors Light','Millers',4.95),('Croissant','Starbucks',2.29),('Dryer','General Electric',999.99),('Egg','Patty\'s',10.99),('Gator T-Shirt','Cotton Tee',25.95),('Hot Coffee','Starbucks',2.25),('Iced Coffee','Starbucks',3.25),('Jitsu Scroll','Dangerous',99.99),('Large Autumn Candle','Yankee Candle',24.99),('Magic Kit','Mad Scientist',45.95),('Mead','Hobbit Brewed',9.75),('Men\'s Fitted Suit','Gucci',885.99),('NMD R1','Adidas',120.00),('Pine Wax Melt','Yankee Candle',5.99),('Sandwich','Generic',7.99),('Ultra Boost X','Adidas',180.00),('Washer','General Electric',999.99),('Winter Boots','Uggs',35.99);
+INSERT INTO `items` VALUES ('Cake Pop','Starbucks',1.56),('Coors Light','Millers',4.95),('Croissant','Starbucks',2.29),('Dryer','General Electric',999.99),('Egg','Patty\'s',10.99),('Gator T-Shirt','Cotton Tee',25.95),('Hot Coffee','Starbucks',2.25),('Iced Coffee','Starbucks',3.25),('Jitsu Scroll','Dangerous',99.99),('Large Autumn Candle','Yankee Candle',24.99),('Magic Kit','Mad Scientist',45.95),('Mead','Hobbit Brewed',9.75),('Men\'s Fitted Suit','Gucci',885.99),('NMD R1','Adidas',120.00),('Pine Wax Melt','Yankee Candle',5.99),('Sandwich','Food Court',7.99),('Ultra Boost X','Adidas',180.00),('Washer','General Electric',999.99),('Winter Boots','Uggs',35.99);
 /*!40000 ALTER TABLE `items` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -225,4 +317,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-04-02 15:04:03
+-- Dump completed on 2018-04-21 21:37:14
