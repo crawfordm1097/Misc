@@ -10,6 +10,3 @@ CL fantasy chess game created for a group project.
 
 ### Mall JDBC
 GUI for a Mall database created for a databases project.
-
-### Random Color Generator
-A simple app to generate random colors.
