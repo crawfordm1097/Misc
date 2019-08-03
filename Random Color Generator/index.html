@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Random Color Generator</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <link rel="stylesheet" href="index.css"></link>
+  </head>
+  <body style="height: 100%; margin: auto">
+    <div id="root"></div>
+    <script type="text/babel">
+
+    class RandomColor extends React.Component {
+      constructor(props) {
+        super(props);
+        var firstColor = this.findColor();
+
+        this.state = {
+          color: firstColor,
+          dark: this.isColorDark(firstColor)
+        }
+      }
+
+      /**
+        * Returns a random array of colors.
+        */
+      findColor() {
+        for (var i = 0, random = []; i < 3; i++) {
+          random.push(Math.floor(Math.random()*256));
+        }
+
+        return random;
+      }
+
+      /**
+        * Determines if an array of colors is light or dark to the human eye.
+        */
+      isColorDark(color) {
+        var avg =  1 - ( 0.299 * color[0] + 0.587 * color[1] + 0.114 * color[2])/255;
+
+        return (avg > 0.5);
+      }
+
+      /**
+        * Formats an array of colors to an RGB format.
+        */
+      formatRGBColor(color) {
+        return 'rgb(' + color.join(', ') + ')';
+      }
+
+      /**
+        * Formats an array of colors to a Hex format.
+        */
+      formatHexColor(color) {
+        var hex = '#';
+
+        color.map((value) => {
+          hex += value.toString(16);
+        });
+
+        return hex;
+      }
+
+      /**
+        * Finds a new random color.
+        */
+      handleRefresh = (e) => {
+        e.preventDefault();
+        var newColor = this.findColor();
+
+        this.setState({
+          color: newColor,
+          dark: this.isColorDark(newColor)
+        });
+      }
+
+      /**
+        * Defines the rendering for the RandomColor.
+        */
+      render() {
+        const rgbColor = this.formatRGBColor(this.state.color);
+        const colorNameCss = {color: (this.state.dark ? 'white' : 'black')};
+        const colorBlockCss = {height: '100%', background: rgbColor};
+
+        return (
+          <div className='main-content' style={colorBlockCss}>
+
+            <div>
+
+              <h1 style={colorNameCss}>{this.formatHexColor(this.state.color)}</h1>
+              <h1 style={colorNameCss}>{rgbColor}</h1>
+
+              <div className={this.state.dark ? 'light btn' : 'dark btn'} onClick={this.handleRefresh}>
+                <h1>Refresh</h1>
+              </div>
+
+            </div>
+
+          </div>
+        );
+      }
+    }
+
+    ReactDOM.render(
+      <RandomColor />,
+      document.getElementById('root')
+    );
+
+
+    </script>
+  </body>
+</html>
